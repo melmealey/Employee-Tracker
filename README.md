@@ -1,6 +1,7 @@
-## Employee Tracker
+# Employee Tracker
 
 ## Description
+As a business owner I WANT to be able to view and manage the departments, roles, and employees in my company so that I can organize and plan my business
 
 
 ## Intallation
@@ -12,7 +13,8 @@
 ## Credits
 
 
-# These were all helpful websites too:
+### These were all helpful websites too:
+
 
 
 
@@ -22,4 +24,3 @@ Please refer to the LICENSE in the repo.
 
 
 Repo: https://github.com/melmealey/HMWK
-# Employee-Tracker
