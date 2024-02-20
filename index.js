@@ -1,72 +1,37 @@
 const sequelize = require('./config/connection')
 const inquirer = require('inquirer')
-// const employee = require('./employee')
+const {viewEmployee, addEmployee} = require('./lib/employee')
+
 // const department = require('./department')
 // const role = require('./role')
 
-const viewEmployee = async () => {
-  const result = await sequelize.query("SELECT * FROM employee");
-  console.log(result[0]);
-  return result[0];
-}
 
 const viewRole = async () => {
   const result = await sequelize.query("SELECT * FROM role");
-  console.log(result[0]);
+  console.table(result[0]);
   return result[0];
 }
 
 const viewDepartment = async () => {
   const result = await sequelize.query("SELECT * FROM department");
-  console.log(result[0]);
+  console.table(result[0]);
   return result[0];
 
 }
-
-const addEmployee = async () => {
-  //fname, lname, role_id, manager_id
-  const employeeInfo = await viewEmployee();
+const addDepartment = async () => {
+  const departmentInfo = await viewDepartment();
   const roleInfo = await viewRole();
 
-  const employeePrompt= employeeInfo.map (() =>{
+  const departmentPrompt= departmentInfo.map (() =>{
     return {
       name: employeeInfo.fname + " " + employeeInfo.lname,
       value: employeeInfo.id
     }
   })
-  
-const rolePrompt= roleInfo.map((role) => {
-  return {
-      name: role.title,
-      value: role.id 
-  }
-})
-
-  const response = await inquirer.prompt([
-    {
-      type: "text",
-      message: "Please enter a first name",
-    },
-    {
-      type: "text",
-      message: "Please enter a last name",
-    },
-    {
-      type: "list",
-      message: "Please choose a manager",
-      name: "manager",
-      choices: employeePrompt
-    },
-    {
-      type: "list",
-      message: "Please choose a role",
-      name: "role",
-      choices: rolePrompt
-    }
-  ])
-    console.log(response.role);
-    console.log(response.manager)
 }
+
+  
+ 
 //view all departments, view all roles, wiew all employees,
 //add a department, add a role, add an employee,
 //and update an employee role
@@ -75,7 +40,7 @@ const start = async () => {
   const response = await inquirer.prompt([
     {
       type: "list",
-      message: "Choose from the options below:",
+      message: "What would you like to do?:",
       name: "selection",
       choices: [
         {
@@ -106,7 +71,6 @@ const start = async () => {
           name: "Update an employee role",
           value: "UPDATE EMP ROLE"
         }
-
       ]
     }
   ])
@@ -114,29 +78,32 @@ const start = async () => {
 
   switch (selection) {
     case "VIEW DEPT":
-      console.log('You chose department view')
+      console.log('View All Departments')
       viewDepartment();
       break;
     case "VIEW ROLE":
-      console.log('You chose role view')
+      console.log('View All Roles')
       viewRole();
       break;
     case "VIEW EMP":
-      console.log('You chose employee view')
+      console.log('View All Employees')
       viewEmployee();
       break
     case "ADD DEPT":
-      console.log('You chose ADD department')
+      console.log('ADD a Department')
       break;
     case "ADD ROLE":
-      console.log('You chose ADD role')
+      console.log('ADD a Role')
       break;
     case "ADD EMP":
-      console.log('You chose ADD employee')
+      console.log('ADD an Employee')
       addEmployee();
+      break;
+    case "UPDATE EMP ROLE":
+      console.log('UPDATE an Employee Role')
+      updateEmployee();
       break;
   }
 }
 
 sequelize.sync({ force: false }).then(start)
-
