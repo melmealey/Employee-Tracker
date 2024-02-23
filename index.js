@@ -1,8 +1,7 @@
 const sequelize = require('./config/connection')
 const inquirer = require('inquirer')
 const {viewEmployee, addEmployee} = require('./lib/employee')
-
-// const department = require('./department')
+const {viewDepartment, addDepartment} = require('./lib/department')
 // const role = require('./role')
 
 
@@ -12,26 +11,6 @@ const viewRole = async () => {
   return result[0];
 }
 
-const viewDepartment = async () => {
-  const result = await sequelize.query("SELECT * FROM department");
-  console.table(result[0]);
-  return result[0];
-
-}
-const addDepartment = async () => {
-  const departmentInfo = await viewDepartment();
-  const roleInfo = await viewRole();
-
-  const departmentPrompt= departmentInfo.map (() =>{
-    return {
-      name: employeeInfo.fname + " " + employeeInfo.lname,
-      value: employeeInfo.id
-    }
-  })
-}
-
-  
- 
 //view all departments, view all roles, wiew all employees,
 //add a department, add a role, add an employee,
 //and update an employee role
@@ -78,22 +57,18 @@ const start = async () => {
 
   switch (selection) {
     case "VIEW DEPT":
-      console.log('View All Departments')
       viewDepartment();
       break;
     case "VIEW ROLE":
-      console.log('View All Roles')
       viewRole();
       break;
     case "VIEW EMP":
-      console.log('View All Employees')
       viewEmployee();
       break
     case "ADD DEPT":
-      console.log('ADD a Department')
+      console.log('ADD a Deaprtment')
       break;
     case "ADD ROLE":
-      console.log('ADD a Role')
       break;
     case "ADD EMP":
       console.log('ADD an Employee')
