@@ -14,7 +14,7 @@ As a business owner I WANT to be able to view and manage the departments, roles,
 
 
 ### These were all helpful websites too:
-
+To join tables information together I learned more here: (https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-joins/)
 
 
 
