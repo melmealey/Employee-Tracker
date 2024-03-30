@@ -11,10 +11,6 @@ const viewRole = async () => {
   return result[0];
 }
 
-//view all departments, view all roles, wiew all employees,
-//add a department, add a role, add an employee,
-//and update an employee role
-
 const start = async () => {
   const response = await inquirer.prompt([
     {
@@ -66,7 +62,7 @@ const start = async () => {
       viewEmployee();
       break
     case "ADD DEPT":
-      console.log('ADD a Deaprtment')
+      addDepartment();
       break;
     case "ADD ROLE":
       break;
